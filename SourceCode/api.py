@@ -6,6 +6,6 @@ class TweetBot():
     auth.set_access_token(AccessToken,SecretToken)
     api = tweepy.API(auth)
 
-    def TweetingUpdate():
+    def TweetingUpdate(self):
         pass
 
