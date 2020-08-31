@@ -1,12 +1,16 @@
 import requests
 
 class GitHubApi():
-    url = "https://api.github.com"
-    MyUrl = "https://api.github.com/repos/CalebThePerson/DoujinshiFinder"
+    #The urls we will be using throughout the code
 
+    def init(self):
+        self.url = "https://api.github.com"
+        self.MyUrl = "https://api.github.com/repos/CalebThePerson/DoujinshiFinder"
+        self.CommitURL = "https://api.github.com/repos/CalebThePerson/DoujinshiFinder/commits"
+
+        #Calls the GitHub api and then calls specific information
     def CommitInfo(self):
-        CommitURL = "https://api.github.com/repos/CalebThePerson/DoujinshiFinder/commits"
-        request = requests.get(url=CommitURL)
+        request = requests.get(url=self.CommitURL)
         data = request.json()
 
         CommitMessage = data[0]["commit"]["message"]
@@ -17,7 +21,13 @@ class GitHubApi():
         
         return CommitMessage, NumberOfCommits
 
+    def Checker(self):
+        #Think of way to check and tell that the commit is new and haven't already been tweeted about
+        '''
+        So what we can do is filter through my tweets and then we can have it filter through it for the commit number
+        '''
+        pass
+
 
 
 yeth = GitHubApi()
-yeth.CommitInfo()
