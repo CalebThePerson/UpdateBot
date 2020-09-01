@@ -25,70 +25,99 @@ class TweetBot():
         api.update_status("Pleae Help Me")
         print("Done")
 
-    def Stuff(self,TheArray):
-        amount = len(TheArray)
-        NewArrayForChecking = []
+    def Stuff(self,TheNum):
+        #This functions double checks to make sure that the shit is actually a number
+        try:
+            if int(TheNum):
+                print("Good")
+                return TheNum
 
-        for num in range(0,amount):
-
-            try:
-                if int(TheArray[num]):
-                    print("Good")
-                    print(TheArray[num])
-                    NewArrayForChecking.append(TheArray[num])
-
-            except ValueError:
-                print("Not poggers")
-                pass
-
+        except ValueError:
+            print("Not poggers")
             pass
-        
-        NewArrayForChecking.sort()
+
+            
+
+    def MaxCommitNumber(self):
+        pass
         # return NewArrayForChecking[0]
             
+    def HereWeGoAgain(self, TheStats, meth):
+        #This is for single digit tweets
+        if len(meth) < 10 and len(meth) <= 9:
+            print(TheStats)
+            return TheStats[8:9]
 
-    def CharacterStruffRenameLater(self, TheStatus, yeth):
-        if len(TheStatus) > 8 and len(yeth) < 9:
-            print(TheStatus)
-            return TheStatus[:8]
-            
-        elif len(TheStatus) > 9 and len(yeth) < 10:
-            print(TheStatus)
-            return TheStatus[:9]
+            #Double Digit Tweets
+        elif len(meth) > 9 and len(meth) <= 10:
+            print(TheStats)
+            return TheStats[8:10]
+
+            #The rest because im too lazy to do this
+        else:
+            print("Not poggers")
+            pass
             
 
     def FilterFunction(self, TheTweet):
-        if filter(TheTweet, "Commit"):
+        if filter(TheTweet, "Commit #"):
             return TheTweet
+        else:
+            return
         
 
     def CommitNumber(self):
         welp = []
-
-
+        
+        #Gets the certain number of tweets from my personal timeline
         for status in LimitHandler(tweepy.Cursor(api.user_timeline).items(7)):
-
-
+            #Adds the tweets to an array
             x = str(status.text)
-            print(x)[:8]
+            welp.append(x)
+        
+        #Creates new array and then filters the tweets that has the word Commit in it
+        NewArray = []
+        for num in range(0,len(welp)):
+            if self.FilterFunction(welp[num]) != None:
+                kerchew = self.FilterFunction(welp[num])
+                NewArray.append(kerchew)
+
+
+        
+        LengthofNewArray = len(NewArray)
+        CommitArray = []
+
+        #Loops through the array and the gets the commit number from the tweets
+        for num in range(0,LengthofNewArray):
+
+            TheThing = NewArray[num]
+            yeth = [i for ele in NewArray[num] for i in ele]
+            print(yeth)
+            print(len(yeth))
+            HopefullyTheCommitTweet = self.HereWeGoAgain(TheThing,yeth)
             
-            if filter(x,"Commit #"):
+            if HopefullyTheCommitTweet != None:
+                CommitArray.append(HopefullyTheCommitTweet)
+            else:
+                pass
+        
+        print(CommitArray)
 
-                yeths = [i for ele in x for i in ele]
-                welp.append(self.CharacterStruffRenameLater(x, yeths))
+        #Now we are just double checking to make sure that the things in the array are actually numbers and no stupid bug
 
-        print(welp)
+        for num in range(0, len(CommitArray)):
+            self.Stuff(CommitArray[num])
 
 
-                # print(status.text)
 
-            # self.Stuff(welp)
 
 
     def BotherMakar(self):
         api.send_direct_message("958734505006608384", "Hey cutie")
+        print("Done")
 
 
 yeth = TweetBot()
 # yeth.TweetingUpdate()
 yeth.CommitNumber()
+# yeth.BotherMakar()
