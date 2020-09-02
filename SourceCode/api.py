@@ -1,5 +1,5 @@
 from Tokens import ConsumerSecret,ConsumerKey,AccessToken,SecretToken
-from GitHubApi import GitHubApi
+from GitHubApi import GitHubApi, URlWithNoAPI
 import tweepy
 import time
 
@@ -21,8 +21,17 @@ def LimitHandler(cursor):
 
 class TweetBot():
 
+
+    def init(self):
+        self.TheCommit = 0
+        self.Message = ""
+        self.ThirdVariable = ""
+        self.TheTweet = ""
+
     def TweetingUpdate(self):
-        api.update_status("Pleae Help Me")
+        self.CommitNumber()
+        print(self.TheTweet)
+        api.update_status(self.TheTweet)
         print("Done")
 
     def Stuff(self,TheNum):
@@ -38,9 +47,9 @@ class TweetBot():
 
             
 
-    def MaxCommitNumber(self):
+    def MaxCommitNumber(self, AnotherArray):
+
         pass
-        # return NewArrayForChecking[0]
             
     def HereWeGoAgain(self, TheStats, meth):
         #This is for single digit tweets
@@ -52,6 +61,10 @@ class TweetBot():
         elif len(meth) > 9 and len(meth) <= 10:
             print(TheStats)
             return TheStats[8:10]
+
+        elif len(meth) > 10 and len(meth) <= 11:
+            print(TheStats)
+            return TheStats[8:11]
 
             #The rest because im too lazy to do this
         else:
@@ -68,9 +81,8 @@ class TweetBot():
 
     def CommitNumber(self):
         welp = []
-        
         #Gets the certain number of tweets from my personal timeline
-        for status in LimitHandler(tweepy.Cursor(api.user_timeline).items(7)):
+        for status in LimitHandler(tweepy.Cursor(api.user_timeline).items(20)):
             #Adds the tweets to an array
             x = str(status.text)
             welp.append(x)
@@ -105,12 +117,21 @@ class TweetBot():
 
         #Now we are just double checking to make sure that the things in the array are actually numbers and no stupid bug
 
+        DoubleCheckingArray = []
         for num in range(0, len(CommitArray)):
-            self.Stuff(CommitArray[num])
+            DoubleCheckingArray.append(self.Stuff(CommitArray[num]))
+        
+        print(DoubleCheckingArray)
+        self.GatherInfo(DoubleCheckingArray[0])
 
 
 
+    def GatherInfo(self, LastKnownCommitNum):
+        BitBub = GitHubApi()
+        SearchingFor =+ 1 + int(LastKnownCommitNum)
 
+        self.Message, self.TheCommit =BitBub.CommitInfo(SearchingFor)
+        self.TheTweet = f"Commit #{self.TheCommit} : {self.Message}.   {URlWithNoAPI}"
 
     def BotherMakar(self):
         api.send_direct_message("958734505006608384", "Hey cutie")
@@ -118,6 +139,5 @@ class TweetBot():
 
 
 yeth = TweetBot()
-# yeth.TweetingUpdate()
 yeth.CommitNumber()
-# yeth.BotherMakar()
+# yeth.TweetingUpdate()
