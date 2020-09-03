@@ -40,29 +40,26 @@ class TweetBot():
             if int(TheNum):
                 print("Good")
                 return TheNum
+            else:
+                pass
 
         except ValueError:
             print("Not poggers")
             pass
 
             
-
-    def MaxCommitNumber(self, AnotherArray):
-
-        pass
-            
     def HereWeGoAgain(self, TheStats, meth):
         #This is for single digit tweets
-        if len(meth) < 10 and len(meth) <= 9:
+        if len(meth) > 10 and len(meth) <= 95:
             print(TheStats)
             return TheStats[8:9]
 
             #Double Digit Tweets
-        elif len(meth) > 9 and len(meth) <= 10:
+        elif len(meth) > 9 and len(meth) <= 96:
             print(TheStats)
             return TheStats[8:10]
 
-        elif len(meth) > 10 and len(meth) <= 11:
+        elif len(meth) > 10 and len(meth) <= 97:
             print(TheStats)
             return TheStats[8:11]
 
@@ -77,12 +74,24 @@ class TweetBot():
             return TheTweet
         else:
             return
+
+    def NoneFilter(self, AnArray):
+        Length = len(AnArray)
+        Yeth = []
+
+        for num in range(0,Length):
+            if AnArray[num] != None:
+                Yeth.append(AnArray[num])
+            else:
+                pass
+        return Yeth
+
         
 
     def CommitNumber(self):
         welp = []
         #Gets the certain number of tweets from my personal timeline
-        for status in LimitHandler(tweepy.Cursor(api.user_timeline).items(20)):
+        for status in LimitHandler(tweepy.Cursor(api.user_timeline).items(30)):
             #Adds the tweets to an array
             x = str(status.text)
             welp.append(x)
@@ -111,8 +120,8 @@ class TweetBot():
             if HopefullyTheCommitTweet != None:
                 CommitArray.append(HopefullyTheCommitTweet)
             else:
-                pass
-        
+                pass        
+
         print(CommitArray)
 
         #Now we are just double checking to make sure that the things in the array are actually numbers and no stupid bug
@@ -122,7 +131,17 @@ class TweetBot():
             DoubleCheckingArray.append(self.Stuff(CommitArray[num]))
         
         print(DoubleCheckingArray)
-        self.GatherInfo(DoubleCheckingArray[0])
+        NewFilter = self.NoneFilter(DoubleCheckingArray)
+        print(NewFilter)
+
+        self.GatherInfo(NewFilter[0])
+
+        # SoLost = []
+        # for num in range(0,len(NewFilter)):
+        #     print(NewFilter[num])
+        #     SoLost.append(self.Stuff(NewFilter[num]))
+
+
 
 
 
@@ -130,8 +149,12 @@ class TweetBot():
         BitBub = GitHubApi()
         SearchingFor =+ 1 + int(LastKnownCommitNum)
 
-        self.Message, self.TheCommit =BitBub.CommitInfo(SearchingFor)
-        self.TheTweet = f"Commit #{self.TheCommit} : {self.Message}.   {URlWithNoAPI}"
+        if BitBub.CommitInfo(SearchingFor) != False:
+            self.Message, self.TheCommit = BitBub.CommitInfo(SearchingFor)
+            self.TheTweet = f"Commit #{self.TheCommit} : {self.Message}.   {URlWithNoAPI}"
+        else:
+            print("already pubslished")
+        
 
     def BotherMakar(self):
         api.send_direct_message("958734505006608384", "Hey cutie")

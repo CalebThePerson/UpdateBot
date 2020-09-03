@@ -32,6 +32,6 @@ class GitHubApi():
         if self.Checker(CommitWeWant,NumberOfCommits) == True:
             return CommitMessage, NumberOfCommits
         else:
-            pass
+            return False
 
 
