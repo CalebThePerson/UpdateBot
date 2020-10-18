@@ -1,4 +1,6 @@
 import requests
+from Tokens import GitHubClient, ClientSecret
+
 
 #The urls we will be using throughout the code
 
@@ -35,8 +37,15 @@ class GitHubApi():
         print(CommitMessage, NumberOfCommits)
 
         if self.Checker(CommitWeWant,NumberOfCommits) == True:
+            print(CommitWeWant)
+            print(NumberOfCommits)
             return CommitMessage, NumberOfCommits
         else:
-            return False
+            if CommitWeWant == 999:
+                print(NumberOfCommits, CommitWeWant)
+                return CommitMessage, NumberOfCommits
+            else:
+                return False
+
 
 

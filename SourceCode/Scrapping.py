@@ -4,6 +4,7 @@ import time
 import datetime
 import itertools as IT
 from main import main as yeth
+import string
 
 
 def Compare(ArrayOne, Arraytwo):
@@ -14,7 +15,7 @@ def Compare(ArrayOne, Arraytwo):
 
 while True:
 
-    time.sleep(10)
+    time.sleep(3600)
     #The Url we are using
     url = "https://github.com/CalebThePerson?tab=repositories"
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
@@ -74,9 +75,23 @@ while True:
     for name, date in zip(OnSiteArray, OnSiteDate):
         OnSiteDict[name] = date
 
+    dupe = None
 
-    if RepoArray != OnSiteArray:
-        print("Taddaaaaa")
+    # if RepoArray != OnSiteArray:
+    #     Name = RepoArray[0]
+    #     Name.strip()
+    #     yeth(Name.strip())
+    #     dupe = True
+
+    #     # print(Name.strip())
+    #     try:
+    #         with open("Poggers.html", mode="r+") as PoggersFile:
+    #             PoggersFile.truncate(0)
+    #             PoggersFile.write(str(soup))
+    #             PoggersFile.close
+    #     except FileExistsError:
+    #         print("WElp damn")
+
 
     Difference = "daate"
     if DateArray != OnDateArray:
@@ -90,10 +105,15 @@ while True:
         except FileExistsError:
             print("WElp damn")
 
-if Difference != "daate":
-    Name = list(WifiDict.keys())[list(WifiDict.values()).index(Difference)]
-    yeth(Name)
-    print(Name)
+    if Difference != "daate":
+        Name = list(WifiDict.keys())[list(WifiDict.values()).index(Difference)]
+        if dupe != True:
+            print("ran")
+            yeth(Name.strip())
+        else:
+            pass
+
+    break
         
     
 

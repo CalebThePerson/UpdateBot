@@ -1,4 +1,4 @@
-from Tokens import ConsumerSecret,ConsumerKey,AccessToken,SecretToken
+from Tokens import ConsumerSecret,ConsumerKey,AccessToken,SecretToken, GitHubClient, ClientSecret
 from GitHubApi import GitHubApi
 import tweepy
 import time
@@ -68,7 +68,11 @@ class TweetBot():
                 except ValueError:
                     pass
                     
-        print(NumerArray)  
+        print(NumerArray)
+
+        if NumerArray == []:
+            NumerArray.append(0)
+
         self.GatherInfo(max(NumerArray))
 
 
@@ -76,13 +80,26 @@ class TweetBot():
 
     def GatherInfo(self, LastNumber):
         BitBub = GitHubApi(self.reponame)
-        SearchingFor = 1 + LastNumber
-
-        if BitBub.CommitInfo(SearchingFor) != False:
-            self.Message, self.TheCommit = BitBub.CommitInfo(SearchingFor)
-            self.TheTweet = f"{self.reponame}, Commit#{self.TheCommit} : {self.Message}. {BitBub.URLwithnoAPI}"
+        print(LastNumber)
+        if LastNumber == 0:
+            if BitBub.CommitInfo(999) !=False:
+                
+                self.Message, self.TheCommit = BitBub.CommitInfo(999)
+                self.TheTweet = f"{self.reponame}, Commit#{self.TheCommit} : {self.Message}. {BitBub.URLwithnoAPI}"
+            else:
+                pass
         else:
-            print("This  has already beeen published")
+
+            SearchingFor = 1 + LastNumber
+
+            if BitBub.CommitInfo(SearchingFor) != False:
+                self.Message, self.TheCommit = BitBub.CommitInfo(SearchingFor)
+                self.TheTweet = f"{self.reponame}, Commit#{self.TheCommit} : {self.Message}. {BitBub.URLwithnoAPI}"
+
+            
+            elif BitBub.CommitInfo(SearchingFor) == False:
+                print("This  has already beeen published")
+
     
 
     def BotherMakar(self):
