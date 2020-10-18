@@ -92,7 +92,7 @@ class TweetBot():
                 
 
 
-# yeth = TweetBot(name="UpdateBot")
-# # yeth.CommitNumber()
-# # yeth.BotherMakar()
-# yeth.TweetingUpdate()
+yeth = TweetBot(name="UpdateBot")
+# yeth.CommitNumber()
+# yeth.BotherMakar()
+yeth.TweetingUpdate()

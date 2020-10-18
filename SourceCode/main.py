@@ -1,11 +1,9 @@
 from api import TweetBot
 
-def main():
+def main(updatefor):
     Bot = TweetBot()
-    Bot.TweetingUpdate()
+    Bot.TweetingUpdate(updatefor)
 
 
 
 
-if __name__ == "__main__":
-    main()
