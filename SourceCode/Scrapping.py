@@ -75,7 +75,6 @@ while True:
     for name, date in zip(OnSiteArray, OnSiteDate):
         OnSiteDict[name] = date
 
-    dupe = None
 
     # if RepoArray != OnSiteArray:
     #     Name = RepoArray[0]
@@ -107,11 +106,9 @@ while True:
 
     if Difference != "daate":
         Name = list(WifiDict.keys())[list(WifiDict.values()).index(Difference)]
-        if dupe != True:
-            print("ran")
-            yeth(Name.strip())
-        else:
-            pass
+        print("ran")
+        yeth(Name.strip())
+
 
         
     
