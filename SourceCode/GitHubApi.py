@@ -48,4 +48,18 @@ class GitHubApi():
                 return False
 
 
+    def GatherInfo(self, CommitWeWant):
+        request = requests.get(url=self.CommitURL)
+        data = request.json()
+
+        CommitMessage = data[int(CommitWeWant)]["commit"]["message"]
+
+        NumberOfCommits = 0
+        for commits in range(0,len(data)):
+            NumberOfCommits+=1 
+
+        return CommitMessage, NumberOfCommits
+
+
+
 

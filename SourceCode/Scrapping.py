@@ -10,6 +10,7 @@ import string
 def Compare(ArrayOne, Arraytwo):
     for one, two in zip(ArrayOne,Arraytwo):
         if one != two:
+            print(one)
             return one
 
 
@@ -92,7 +93,7 @@ while True:
     #         print("WElp damn")
 
 
-    Difference = "daate"
+    Difference = None
     if DateArray != OnDateArray:
         Difference = Compare(DateArray, OnDateArray)
 
@@ -104,7 +105,7 @@ while True:
         except FileExistsError:
             print("WElp damn")
 
-    if Difference != "daate":
+    if Difference != None:
         try:
             Name = list(WifiDict.keys())[list(WifiDict.values()).index(Difference)]
             print("ran")
@@ -112,6 +113,8 @@ while True:
             pass
         except ValueError:
             print("Some fuckin error occured")
+    else:
+        print("There are no new changes")
 
         
     

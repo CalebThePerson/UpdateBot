@@ -56,19 +56,19 @@ class TweetBot():
 
         NumerArray = []
         for tweet in FilteredRepoArray:
-            for character in range(0,len(tweet)/2):
+            for character in range(0,len(tweet)):
                 try:
                     int(tweet[character])
                     print(f"This is{ int(tweet[character])}")
 
                     if int(tweet[character]):
                         print(f"Thsi crap {int(tweet[character:character+2])}")
-
                         NumerArray.append(int(tweet[character: character+2]))
+                        break
                     else:
                         NumerArray.append(int(tweet[character]))
-
                         NumerArray.append(int(tweet[character]))
+                        break
 
                 except ValueError:
                     pass
