@@ -15,7 +15,7 @@ def Compare(ArrayOne, Arraytwo):
 
 while True:
 
-    time.sleep(3600)
+    # time.sleep(10)
     #The Url we are using
     url = "https://github.com/CalebThePerson?tab=repositories"
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
@@ -105,11 +105,13 @@ while True:
             print("WElp damn")
 
     if Difference != "daate":
-        Name = list(WifiDict.keys())[list(WifiDict.values()).index(Difference)]
-        print("ran")
-        yeth(Name.strip())
-        pass
-
+        try:
+            Name = list(WifiDict.keys())[list(WifiDict.values()).index(Difference)]
+            print("ran")
+            yeth(Name.strip())
+            pass
+        except ValueError:
+            print("Some fuckin error occured")
 
         
     
