@@ -55,8 +55,8 @@ class TweetBot():
         print(FilteredRepoArray)
 
         NumerArray = []
-        for tweet[0:len(tweet)/2] in FilteredRepoArray:
-            for character in range(0,len(tweet)):
+        for tweet in FilteredRepoArray:
+            for character in range(0,len(tweet)/2):
                 try:
                     int(tweet[character])
                     print(f"This is{ int(tweet[character])}")
